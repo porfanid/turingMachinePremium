@@ -36,3 +36,21 @@ jobs:
         with:
           name: turingmachine.pro.exe
           path: turingmachine.pro.exe
+      
+      - name: Install Inno Setup Compiler
+        run: |
+          mkdir "C:\tools"
+          Invoke-WebRequest -Uri "https://www.jrsoftware.org/download.php/is-unicode.exe" -OutFile "C:\tools\is-unicode.exe"
+          Start-Process "C:\tools\is-unicode.exe" -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-' -Wait
+          Remove-Item "C:\tools\is-unicode.exe" -Force
+
+      - name: Build Installer
+        run: |
+          cd ${{ github.workspace }}
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" TuringMachineSetup.iss
+
+      - name: Upload Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: TuringMachineInstaller
+          path: Output/TuringMachineSetup.exe
