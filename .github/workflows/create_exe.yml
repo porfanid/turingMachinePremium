@@ -37,9 +37,14 @@ jobs:
           name: turingmachine.pro.exe
           path: turingmachine.pro.exe
       
+      - name: Create Tools Directory
+        run: |
+          if (!(Test-Path -Path "C:\tools")) {
+            mkdir "C:\tools"
+          }
+
       - name: Install Inno Setup Compiler
         run: |
-          mkdir "C:\tools"
           Invoke-WebRequest -Uri "https://www.jrsoftware.org/download.php/is-unicode.exe" -OutFile "C:\tools\is-unicode.exe"
           Start-Process "C:\tools\is-unicode.exe" -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-' -Wait
           Remove-Item "C:\tools\is-unicode.exe" -Force
