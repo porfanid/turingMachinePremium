@@ -45,14 +45,13 @@ jobs:
 
       - name: Install Inno Setup Compiler
         run: |
+          if (!(Test-Path -Path "C:\tools")) {
+            mkdir "C:\tools"
+          }
           Invoke-WebRequest -Uri "https://www.jrsoftware.org/download.php/is-unicode.exe" -OutFile "C:\tools\is-unicode.exe"
-          Start-Process "C:\tools\is-unicode.exe" -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-' -Wait
+          Invoke-Expression -Command "C:\tools\is-unicode.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
           Remove-Item "C:\tools\is-unicode.exe" -Force
 
-      - name: Build Installer
-        run: |
-          cd ${{ github.workspace }}
-          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" TuringMachineSetup.iss
 
       - name: Upload Installer
         uses: actions/upload-artifact@v2
