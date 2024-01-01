@@ -26,16 +26,17 @@ jobs:
           echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
           echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
           echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
-          echo "Depends: python3-requests, python3-pip" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
-          
-          python3 -m venv turingmachine.pro/usr/bin/turingmachine.pro/venv
-          turingmachine.pro/usr/bin/turingmachine.pro/venv/bin/python3 -m pip install -r requirements.txt
+          echo "Depends: python3-requests, python3-pip, python3-venv" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
+          echo "Postinst: DEBIAN/postinst" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
 
+          cp postinst turingmachine.pro/DEBIAN
+          chmod +x turingmachine.pro/DEBIAN/postinst
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
           chmod +w turingmachine.pro/usr/bin/turingmachine.pro
           cp turingmachine.pro.py turingmachine.pro/usr/bin/turingmachine.pro
           cp ui_form.py turingmachine.pro/usr/bin/turingmachine.pro
+          cp requirements.txt turingmachine.pro/usr/bin/turingmachine.pro
           cp ui_license_import.py turingmachine.pro/usr/bin/turingmachine.pro
           chmod +x turingmachine.pro/usr/bin/turingmachine.pro/turingmachine.pro.py
 

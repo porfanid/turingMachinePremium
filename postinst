@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+case "$1" in
+  configure)
+    # Create a virtual environment
+    python3 -m venv /usr/bin/turingmachine.pro/venv
+
+    # Activate the virtual environment
+    source /usr/bin/turingmachine.pro/venv/bin/activate
+
+    # Install Python dependencies
+    pip install -r /usr/bin/turingmachine.pro/requirements.txt
+
+    # Deactivate the virtual environment
+    deactivate
+    ;;
+esac
+
+# exit 0 to indicate success
+exit 0
