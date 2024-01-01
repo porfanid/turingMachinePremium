@@ -20,15 +20,17 @@ jobs:
           echo "Section: devel" >> turingmachine.pro/debian/control
           echo "Priority: optional" >> turingmachine.pro/debian/control
           echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/debian/control
-          echo "Build-Depends: debhelper (>= 11), python3-all, other-build-dependencies" >> turingmachine.pro/debian/control
+          echo "Build-Depends: debhelper (>= 11), python3-all" >> turingmachine.pro/debian/control
           echo "Standards-Version: 4.5.1" >> turingmachine.pro/debian/control
           echo "" >> turingmachine.pro/debian/control
           echo "Package: turingmachine.pro" >> turingmachine.pro/debian/control
           echo "Architecture: all" >> turingmachine.pro/debian/control
-          echo "Depends: python3-pip, python3-venv, ${shlibs:Depends}, ${misc:Depends}" >> turingmachine.pro/debian/control
+          echo "Depends: python3-pip, python3-venv, \${shlibs:Depends}, \${misc:Depends}" >> turingmachine.pro/debian/control
           echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/debian/control
           echo " Long description goes here if needed." >> turingmachine.pro/debian/control
+          echo "" >> turingmachine.pro/debian/control
           echo "Postinst: debian/postinst" >> turingmachine.pro/debian/control
+
 
 
           cp changelog turingmachine.pro/debian/
