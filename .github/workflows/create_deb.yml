@@ -75,7 +75,7 @@ jobs:
           debuild -S -k666855A91B3897F4
 
           # Sign the .changes file using the GPG agent
-          gpg --no-use-agent --use-agent --detach-sign --armor -u 666855A91B3897F4 turingmachine.pro_1.0.0-1.dsc
+          gpg --detach-sign --armor -u 666855A91B3897F4 -o ../turingmachine.pro_1.0.0-1.dsc.asc ../turingmachine.pro_1.0.0-1.dsc
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
