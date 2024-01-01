@@ -26,7 +26,11 @@ jobs:
           echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
           echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
           echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
-          echo "Depends: python3-pyside6, python3-requests" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
+          echo "Depends: python3-requests, python3-pip" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
+          
+          python3 -m venv turingmachine.pro/usr/bin/turingmachine.pro/venv
+          turingmachine.pro/usr/bin/turingmachine.pro/venv/bin/python3 -m pip install -r requirements.txt
+
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
           chmod +w turingmachine.pro/usr/bin/turingmachine.pro
@@ -38,7 +42,7 @@ jobs:
           mkdir -p turingmachine.pro/usr/share/applications
           echo "[Desktop Entry]" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Name=TuringMachine.Pro" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
-          echo "Exec=python3 /usr/bin/turingmachine.pro/turingmachine.pro.py" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Exec=/usr/bin/turingmachine.pro/venv/bin/python3 /usr/bin/turingmachine.pro/turingmachine.pro.py" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Icon=/usr/share/icons/turingmachine.pro.png" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Type=Application" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
 
