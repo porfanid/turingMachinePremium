@@ -18,7 +18,10 @@ jobs:
 
           sudo apt-get install debhelper python3-all
 
-          mkdir -p turingmachine.pro/debian
+          mkdir -p turingmachine.pro/debian/source
+
+          echo "1.0" >> turingmachine.pro/debian/source/format
+
           cp changelog turingmachine.pro/debian/
           cp compat turingmachine.pro/debian/
           cp control turingmachine.pro/debian/
