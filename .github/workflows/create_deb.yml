@@ -24,6 +24,9 @@ jobs:
           echo "Depends: python3-pip, python3-venv" >> turingmachine.pro/debian/control  # Specify dependencies
           echo "Postinst: debian/postinst" >> turingmachine.pro/debian/control  # Specify dependencies
 
+          cp changelog turingmachine.pro/debian/
+          cp rules turingmachine.pro/debian/
+          chmod +x turingmachine.pro/debian/rules
           cp postinst turingmachine.pro/debian
           chmod +x turingmachine.pro/debian/postinst
 
@@ -44,7 +47,6 @@ jobs:
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
-          cp changelog turingmachine.pro/debian/
       
       - name: Install Build Dependencies
         run: sudo apt-get install -y devscripts
