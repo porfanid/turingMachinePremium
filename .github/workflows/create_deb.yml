@@ -1,0 +1,56 @@
+name: Create Debian Package
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Prepare Debian package directory
+        run: |
+          mkdir -p turingmachine.pro/DEBIAN
+          echo "Package: turingmachine.pro" >> turingmachine.pro/DEBIAN/control
+          echo "Version: 1.0.0" >> turingmachine.pro/DEBIAN/control
+          echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
+          echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
+          echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
+          echo "Depends: python3-pyside6, python3-requests" >> turnin/DEBIAN/control  # Specify dependencies
+
+          mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
+          chomd +w turingmachine.pro/usr/bin/turingmachine.pro
+          cp turingmachine.pro.py turingmachine.pro/usr/bin/turingmachine.pro
+          cp ui_form.py turingmachine.pro/usr/bin/turingmachine.pro
+          cp ui_license_import.py turingmachine.pro/usr/bin/turingmachine.pro
+          chmod +x turingmachine.pro/usr/bin/turingmachine.pro/turingmachine.pro.py
+          chmor +w turingmachine.pro/usr/bin/turingmachine.pro
+
+          mkdir -p turingmachine.pro/usr/share/applications
+          echo "[Desktop Entry]" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Name=TuringMachine.Pro" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Exec=python3 /usr/bin/turingmachine.pro/turingmachine.pro.py" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Icon=/usr/share/icons/turingmachine.pro.png" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Type=Application" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+
+          mkdir -p turingmachine.pro/usr/share/icons
+          cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
+
+      - name: Build Debian package
+        run: dpkg-deb --build turingmachine.pro
+
+      - name: Upload DEB artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: turingmachine.pro.deb
+          path: turingmachine.pro.deb
