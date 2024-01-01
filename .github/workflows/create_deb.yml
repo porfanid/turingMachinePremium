@@ -17,7 +17,7 @@ jobs:
         run: |
 
 
-
+          mkdir -p turingmachine.pro/debian
           cp changelog turingmachine.pro/debian/
           cp control turingmachine.pro/debian/
           cp rules turingmachine.pro/debian/
@@ -38,7 +38,7 @@ jobs:
           echo "Name=TuringMachine.Pro" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Exec=/usr/bin/turingmachine.pro/venv/bin/python3 /usr/bin/turingmachine.pro/turingmachine.pro.py" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Icon=/usr/share/icons/turingmachine.pro.jpg" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
-          echo "Type=Application" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Type=Applicatio n" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
