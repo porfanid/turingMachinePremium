@@ -1,9 +1,13 @@
+Source: turingmachine.pro
+Section: devel
+Priority: optional
+Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>
+Build-Depends: debhelper (>= 11), python3-all
+Standards-Version: 4.5.1
+
 Package: turingmachine.pro
 Architecture: all
 Depends: python3-pip, python3-venv, ${shlibs:Depends}, ${misc:Depends}
 Description: Run any Turing machine possible using this app
  Long description goes here if needed.
-
-# Add the post-installation script
-postinst:
- debian/postinst
+postinst: debian/postinst
