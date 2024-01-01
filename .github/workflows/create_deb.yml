@@ -44,6 +44,10 @@ jobs:
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
+      
+      - name: Install Build Dependencies
+        run: sudo apt-get install -y devscripts
+
 
       - name: Build and Sign Debian Package
         run: |
