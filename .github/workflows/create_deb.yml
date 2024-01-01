@@ -16,6 +16,7 @@ jobs:
       - name: Prepare Debian package directory
         run: |
 
+          sudo apt-get install debhelper python3-all
 
           mkdir -p turingmachine.pro/debian
           cp changelog turingmachine.pro/debian/
