@@ -52,7 +52,7 @@ jobs:
         run: sudo apt-get install -y devscripts
 
       - name: Create original tar file
-        run: tar -czvf turingmachine.pro_1.0.0.orig.tar.gz turingmachine.pro-1.0.0
+        run: tar -czvf turingmachine.pro_1.0.0.orig.tar.gz turingmachine.pro
 
 
       - name: Build and Sign Debian Package
