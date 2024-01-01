@@ -29,12 +29,11 @@ jobs:
           echo "Depends: python3-pyside6, python3-requests" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
-          chomd +w turingmachine.pro/usr/bin/turingmachine.pro
+          chmod +w turingmachine.pro/usr/bin/turingmachine.pro
           cp turingmachine.pro.py turingmachine.pro/usr/bin/turingmachine.pro
           cp ui_form.py turingmachine.pro/usr/bin/turingmachine.pro
           cp ui_license_import.py turingmachine.pro/usr/bin/turingmachine.pro
           chmod +x turingmachine.pro/usr/bin/turingmachine.pro/turingmachine.pro.py
-          chmor +w turingmachine.pro/usr/bin/turingmachine.pro
 
           mkdir -p turingmachine.pro/usr/share/applications
           echo "[Desktop Entry]" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
