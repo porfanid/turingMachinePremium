@@ -26,7 +26,7 @@ jobs:
           echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
           echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
           echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
-          echo "Depends: python3-pyside6, python3-requests" >> turnin/DEBIAN/control  # Specify dependencies
+          echo "Depends: python3-pyside6, python3-requests" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
           chomd +w turingmachine.pro/usr/bin/turingmachine.pro
