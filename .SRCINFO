@@ -1,0 +1,13 @@
+pkgbase = turingmachine.pro
+	pkgdesc = Run any Turing machine possible using this app
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://turingmachine.pro
+	arch = any
+	license = custom
+	makedepends = python-setuptools
+	depends = python
+	source = turingmachine.pro-1.0.0.tar.gz::git+https://github.com/porfanid/turingMachinePremium.git
+	sha256sums = SKIP
+
+pkgname = turingmachine.pro
