@@ -45,14 +45,24 @@ jobs:
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
 
-      - name: Build Debian package
-        run: dpkg-deb --build turingmachine.pro
+      - name: Build and Sign Debian Package
+        run: |
+          # Import the GPG private key
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+          export DEBFULLNAME="Pavlos Orfanidis"
+          export DEBEMAIL="pavlos@orfanidis.net.gr"
+
+          # Build and sign the source package
+          debuild -S -k666855A91B3897F4
+
+          # Sign the .changes file
+          debsign -k666855A91B3897F4 your-package_version_source.changes
       
       - name: List Files
         run: ls -la
 
-      - name: Upload DEB artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: turingmachine.pro.deb
-          path: turingmachine.pro.deb
+#      - name: Upload DEB artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: turingmachine.pro.deb
+#          path: turingmachine.pro.deb
