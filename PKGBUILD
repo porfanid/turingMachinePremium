@@ -1,4 +1,4 @@
-# PKGBUILD
+# Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>
 
 pkgname=turingmachine.pro
 pkgver=1.0.0
