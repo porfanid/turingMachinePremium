@@ -7,7 +7,6 @@ Standards-Version: 4.5.1
 
 Package: turingmachine.pro
 Architecture: all
-postinst:  debian/postinst
 Depends: python3-pip, python3-venv, ${shlibs:Depends}, ${misc:Depends}
 Description: Run any Turing machine possible using this app
  Long description goes here if needed.
