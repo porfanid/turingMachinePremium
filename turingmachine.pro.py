@@ -18,7 +18,7 @@ def create_uid():
 session = requests
 baseurl = "https://turingmachine.pro/api"
 # baseurl="http://127.0.0.1:5000"
-filename="./config.json"
+filename="./turingmachine.pro.config.json"
 
 
 def read_or_create_config_file(data={"uid":str(uuid.uuid4())}):
