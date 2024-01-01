@@ -15,17 +15,17 @@ jobs:
 
       - name: Prepare Debian package directory
         run: |
-          mkdir -p turingmachine.pro/DEBIAN
-          echo "Package: turingmachine.pro" >> turingmachine.pro/DEBIAN/control
-          echo "Version: 1.0.0" >> turingmachine.pro/DEBIAN/control
-          echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
-          echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
-          echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
-          echo "Depends: python3-pip, python3-venv" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
-          echo "Postinst: DEBIAN/postinst" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
+          mkdir -p turingmachine.pro/debian
+          echo "Package: turingmachine.pro" >> turingmachine.pro/debian/control
+          echo "Version: 1.0.0" >> turingmachine.pro/debian/control
+          echo "Architecture: all" >> turingmachine.pro/debian/control
+          echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/debian/control
+          echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/debian/control
+          echo "Depends: python3-pip, python3-venv" >> turingmachine.pro/debian/control  # Specify dependencies
+          echo "Postinst: debian/postinst" >> turingmachine.pro/debian/control  # Specify dependencies
 
-          cp postinst turingmachine.pro/DEBIAN
-          chmod +x turingmachine.pro/DEBIAN/postinst
+          cp postinst turingmachine.pro/debian
+          chmod +x turingmachine.pro/debian/postinst
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
           chmod +w turingmachine.pro/usr/bin/turingmachine.pro
@@ -44,7 +44,7 @@ jobs:
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
-          cp changelog turingmachine.pro/DEBIAN/
+          cp changelog turingmachine.pro/debian/
       
       - name: Install Build Dependencies
         run: sudo apt-get install -y devscripts
