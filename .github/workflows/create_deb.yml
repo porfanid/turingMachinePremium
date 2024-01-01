@@ -20,6 +20,7 @@ jobs:
 
           mkdir -p turingmachine.pro/debian
           cp changelog turingmachine.pro/debian/
+          cp compat turingmachine.pro/debian/
           cp control turingmachine.pro/debian/
           cp rules turingmachine.pro/debian/
           chmod +x turingmachine.pro/debian/rules
