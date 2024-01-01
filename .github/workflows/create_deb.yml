@@ -60,23 +60,22 @@ jobs:
           # Import the GPG private key
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
 
-          # Create a GPG passphrase file
-          echo "${{ secrets.GPG_PASSPHRASE }}" > gpg_passphrase.txt
-          export GPG_PASSPHRASE_FILE=$(realpath gpg_passphrase.txt)
-
           export DEBFULLNAME="Pavlos Orfanidis"
           export DEBEMAIL="pavlos@orfanidis.net.gr"
+
+          # Set GPG_TTY to point to the terminal
+          export GPG_TTY=$(tty)
 
           cd turingmachine.pro
 
           # Set DEB_BUILD_OPTIONS for parallel builds
           export DEB_BUILD_OPTIONS="parallel=$(nproc)"
 
-          # Build and sign the source package
+          # Build the source package
           debuild -S -k666855A91B3897F4
 
-          # Sign the .changes file using the passphrase file
-          debsign --no-conf --use-agent --secret-key=666855A91B3897F4 --passphrase-file=$GPG_PASSPHRASE_FILE your-package_version_source.changes
+          # Sign the .changes file using the GPG agent
+          gpg --no-use-agent --use-agent --detach-sign --armor -u 666855A91B3897F4 your-package_version_source.changes
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
