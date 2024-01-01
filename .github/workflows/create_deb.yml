@@ -74,6 +74,8 @@ jobs:
           # Build the source package
           debuild -S -k666855A91B3897F4
 
+          ls -la ..
+
           # Sign the .changes file using the GPG agent
           gpg --detach-sign --armor -u 666855A91B3897F4 -o ../turingmachine.pro_1.0.0-1.dsc.asc ../turingmachine.pro_1.0.0-1.dsc
         env:
