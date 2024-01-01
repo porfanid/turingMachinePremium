@@ -44,6 +44,7 @@ jobs:
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
+          cp changelog turingmachine.pro/DEBIAN/
       
       - name: Install Build Dependencies
         run: sudo apt-get install -y devscripts
@@ -55,6 +56,8 @@ jobs:
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
           export DEBFULLNAME="Pavlos Orfanidis"
           export DEBEMAIL="pavlos@orfanidis.net.gr"
+
+          cd turingmachine.pro
 
           # Build and sign the source package
           debuild -S -k666855A91B3897F4
