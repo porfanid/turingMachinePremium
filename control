@@ -10,4 +10,6 @@ Architecture: all
 Depends: python3-pip, python3-venv, ${shlibs:Depends}, ${misc:Depends}
 Description: Run any Turing machine possible using this app
  Long description goes here if needed.
-postinst: debian/postinst
+
+postinst
+ debian/postinst
