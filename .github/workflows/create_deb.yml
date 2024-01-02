@@ -43,7 +43,7 @@ jobs:
           echo "Name=TuringMachine.Pro" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Exec=/usr/bin/turingmachine.pro/venv/bin/python3 /usr/bin/turingmachine.pro/turingmachine.pro.py" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
           echo "Icon=/usr/share/icons/turingmachine.pro.jpg" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
-          echo "Type=Applicatio n" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
+          echo "Type=Application" >> turingmachine.pro/usr/share/applications/turingmachine.pro.desktop
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
@@ -65,8 +65,6 @@ jobs:
 
           # Set GPG_TTY to point to the terminal
           export GPG_TTY=$(tty)
-
-          cd turingmachine.pro
 
           export GNUPGHOME="/home/runner/.gnupg"
 
