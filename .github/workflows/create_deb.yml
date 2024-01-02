@@ -68,16 +68,18 @@ jobs:
 
           cd turingmachine.pro
 
+          export GNUPGHOME="/home/runner/.gnupg"
+
           # Set DEB_BUILD_OPTIONS for parallel builds
           export DEB_BUILD_OPTIONS="parallel=$(nproc)"
 
           # Build the source package
-          debuild -S -k666855A91B3897F4
+          debuild -S -k7F4A64C4D77ADF08A616BEF6666855A91B3897F4
 
           ls -la ..
 
           # Sign the .changes file using the GPG agent
-          gpg --detach-sign --armor -u 666855A91B3897F4 -o ../turingmachine.pro_1.0.0-1.dsc.asc ../turingmachine.pro_1.0.0-1.dsc
+          gpg --detach-sign --armor -u 7F4A64C4D77ADF08A616BEF6666855A91B3897F4 -o ../turingmachine.pro_1.0.0-1.dsc.asc ../turingmachine.pro_1.0.0-1.dsc
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
