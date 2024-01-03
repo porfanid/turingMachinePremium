@@ -1,0 +1,42 @@
+name: Build macOS App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-macos-app:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller
+          pip install -r requirements.txt  # Install all dependencies from requirements.txt
+          brew install create-dmg
+
+      - name: Build macOS App
+        run: |
+          pyinstaller --onefile --console --icon=turingmachine.pro.icns turingmachine.pro.py
+
+          mv dist/turingmachine.pro dist/TuringMacine.Pro.app
+
+          create-dmg --volname "NoveltySeeking" --volicon "turingmachine.pro.icns" --window-pos 200 120 \
+          --window-size 800 400 \
+          --icon-size 100 \
+          "TuringMachine.Pro.dmg" "dist"
+
+      - name: Upload App artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: TuringMachine.Pro.dmg
+          path: TuringMachine.Pro.dmg
