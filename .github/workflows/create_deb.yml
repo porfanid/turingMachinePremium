@@ -15,20 +15,17 @@ jobs:
 
       - name: Prepare Debian package directory
         run: |
+          mkdir -p turingmachine.pro/DEBIAN
+          echo "Package: turingmachine.pro" >> turingmachine.pro/DEBIAN/control
+          echo "Version: 1.0.0" >> turingmachine.pro/DEBIAN/control
+          echo "Architecture: all" >> turingmachine.pro/DEBIAN/control
+          echo "Maintainer: Pavlos Orfanidis <pavlos@orfanidis.net.gr>" >> turingmachine.pro/DEBIAN/control
+          echo "Description: Run any Turing machine possible using this app" >> turingmachine.pro/DEBIAN/control
+          echo "Depends: python3-pip, python3-venv" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
+          echo "Postinst: DEBIAN/postinst" >> turingmachine.pro/DEBIAN/control  # Specify dependencies
 
-          sudo apt-get install debhelper python3-all
-
-          mkdir -p turingmachine.pro/debian/source
-
-          echo "1.0" >> turingmachine.pro/debian/source/format
-
-          cp changelog turingmachine.pro/debian/
-          cp compat turingmachine.pro/debian/
-          cp control turingmachine.pro/debian/
-          cp rules turingmachine.pro/debian/
-          chmod +x turingmachine.pro/debian/rules
-          cp postinst turingmachine.pro/debian
-          chmod +x turingmachine.pro/debian/postinst
+          cp postinst turingmachine.pro/DEBIAN
+          chmod +x turingmachine.pro/DEBIAN/postinst
 
           mkdir -p turingmachine.pro/usr/bin/turingmachine.pro
           chmod +w turingmachine.pro/usr/bin/turingmachine.pro
@@ -47,47 +44,12 @@ jobs:
 
           mkdir -p turingmachine.pro/usr/share/icons
           cp turingmachine.pro.jpg turingmachine.pro/usr/share/icons
-      
-      - name: Install Build Dependencies
-        run: sudo apt-get install -y devscripts
 
-      - name: Create original tar file
-        run: tar -czvf turingmachine.pro_1.0.0.orig.tar.gz turingmachine.pro
+      - name: Build Debian package
+        run: dpkg-deb --build turingmachine.pro
 
-
-      - name: Build and Sign Debian Package
-        run: |
-          # Import the GPG private key
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
-
-          export DEBFULLNAME="Pavlos Orfanidis"
-          export DEBEMAIL="pavlos@orfanidis.net.gr"
-
-          # Set GPG_TTY to point to the terminal
-          export GPG_TTY=$(tty)
-
-          export GNUPGHOME="/home/runner/.gnupg"
-
-          # Set DEB_BUILD_OPTIONS for parallel builds
-          export DEB_BUILD_OPTIONS="parallel=$(nproc)"
-
-          # Build the source package
-          debuild -S -k7F4A64C4D77ADF08A616BEF6666855A91B3897F4
-
-          ls -la ..
-
-          # Sign the .changes file using the GPG agent
-          gpg --detach-sign --armor -u 7F4A64C4D77ADF08A616BEF6666855A91B3897F4 -o ../turingmachine.pro_1.0.0-1.dsc.asc ../turingmachine.pro_1.0.0-1.dsc
-        env:
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
-      
-
-      - name: List Files
-        run: ls -la
-
-#      - name: Upload DEB artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: turingmachine.pro.deb
-#          path: turingmachine.pro.deb
+      - name: Upload DEB artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: turingmachine.pro.deb
+          path: turingmachine.pro.deb
